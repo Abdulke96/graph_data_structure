@@ -1,9 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from typing import Dict, List, Callable, Any
 import random
-import networkx as nx
-import matplotlib.pyplot as plt
 from typing import Dict, List, Tuple
 
 def classify_edges(G: nx.Graph) -> Dict[Tuple[int, int], str]:
@@ -11,11 +8,10 @@ def classify_edges(G: nx.Graph) -> Dict[Tuple[int, int], str]:
     state: Dict[int, int] = {}
     parent: Dict[int, int] = {}
     discovery_time: Dict[int, int] = {}
-    time: List[int] = [0]  # Tracks the time during DFS
+    time: List[int] = [0]  
 
-    # Node states
     NOT_DISCOVERED, IN_PROCESS, DISCOVERED = 0, 1, 2
-
+    
     def dfs(v: int) -> None:
         state[v] = IN_PROCESS
         discovery_time[v] = time[0]
@@ -37,11 +33,9 @@ def classify_edges(G: nx.Graph) -> Dict[Tuple[int, int], str]:
 
         state[v] = DISCOVERED
 
-    # Run DFS from every unvisited node to ensure all components are covered
     for node in G.nodes():
         if state.get(node, NOT_DISCOVERED) == NOT_DISCOVERED:
             dfs(node)
-
     return edge_colors
 
 
